@@ -45,103 +45,105 @@ public class DataHelper extends Activity{
 	}
 	
 	public ArrayList<Line> getAllLines(){
-		this.open();
+		////this.open();
 		String query = "SELECT " + Constants.DB_LINE_FIELDS + " FROM line l"+ 
 				" INNER JOIN company c ON c._id = l.companyID";
 		Log.d(TAG,query);
 		Log.d(TAG, db.getPath());
 		Cursor c = db.rawQuery(query, null);
 		Log.d(TAG, Integer.toString(c.getCount()));
-		this.close();
+		////this.close();
 		Log.d(TAG, Integer.toString(c.getCount()));
 		return getLineObjectArray(c);
 	}
 	
+	public ArrayList<Station> getAllStations(){
+		//this.open();
+		Log.v(TAG, db.toString());
+		String query = "SELECT "+ Constants.DB_STATION_FIELDS + " FROM station s";
+		Cursor c = db.rawQuery(query, null);
+		Log.v(TAG, query.toString());
+		Log.d(TAG, Integer.toString(c.getCount()));
+		//this.close();
+		Log.d(TAG, Integer.toString(c.getCount()));
+		return getStationObjectArray(c);
+	}
+	
 	public ArrayList<Line> getLinesByStation(int stationId) {
-		this.open();
+		//this.open();
 		Cursor c = db.rawQuery("SELECT " +
 								Constants.DB_LINE_FIELDS +
-								" FROM line l"+ 
-								" INNER JOIN stationline sl ON l._id = sl.lineID "+
+								" FROM line l" + 
+								" INNER JOIN stationline sl ON sl.lineID = l._id" +
 								" INNER JOIN company c ON c._id = l.companyID" +
 								" WHERE sl.stationId = ?", new String[] {Integer.toString(stationId)});
 					
-		this.close();
+		//this.close();
 		return getLineObjectArray(c);
 	}
 	
 	public Line getLine(int lineId){
-		this.open();
+		//this.open();
 		Cursor c = db.rawQuery("SELECT " +
 								Constants.DB_LINE_FIELDS +
 								" FROM line l"+ 
 								" INNER JOIN company c ON c._id = l.companyID" +
 								" WHERE l._id = ?", new String[] {Integer.toString(lineId)});
 					
-		this.close();
+		//this.close();
 		return getLineObjectArray(c).get(0);
 	}
 	
 	public ArrayList<Alert> getAllCurrentAlerts(){
-		this.open();
+		//this.open();
 		Cursor c = db.rawQuery("SELECT " + 
 							    Constants.DB_ALERT_FIELDS +
 								"from alert a", null);
-		this.close();
+		//this.close();
 		return getAlertObjectArray(c);
 	}
 	
 	public ArrayList<Alert> getAlertsForStation(int stationId){
-		this.open();
+		//this.open();
 		Cursor c = db.rawQuery("SELECT " + 
 							    Constants.DB_ALERT_FIELDS +
 								" FROM alert a " +
 								" INNER join alertstationline al on a._id = al.alertid" +
 								" INNER join stationline sl on al.stationlineid = sl._Id" +
 								" WHERE sl.stationId =  ?", new String[] {Integer.toString(stationId)});
-		this.close();
+		//this.close();
 		return getAlertObjectArray(c);
 		
 	}
 	public ArrayList<Alert> getAlertsForLine(int lineId){
-		this.open();
+		//this.open();
 		Cursor c = db.rawQuery("SELECT " + 
 								Constants.DB_ALERT_FIELDS +
 								" FROM alert a " +
 								" INNER join alertstationline al on a._id = al.alertid" +
 								" INNER join stationline sl on al.stationlineid = sl._Id" +
 								" WHERE sl.lineId =  ?", new String[] {Integer.toString(lineId)});
-		this.close();
+		//this.close();
 		return getAlertObjectArray(c);
 	}
-	public ArrayList<Station> getAllStations(){
-		this.open();
-		Log.v(TAG, db.toString());
-		String query = "SELECT "+ Constants.DB_STATION_FIELDS + " FROM station s";
-		Cursor c = db.rawQuery(query, null);
-		Log.v(TAG, query.toString());
-		Log.d(TAG, Integer.toString(c.getCount()));
-		this.close();
-		Log.d(TAG, Integer.toString(c.getCount()));
-		return getStationObjectArray(c);
-	}
+
 	public ArrayList<Station> getStationsByLine(int lineId) {
-		//this.open();
+		////this.open();
 		Cursor c = db.rawQuery("SELECT " +
 								Constants.DB_STATION_FIELDS +
 								" FROM station s" +
 								" INNER JOIN stationline sl ON sl.stationid = s._id", 
 								new String[] { Integer.toString(lineId)});
-		//this.close();
+		////this.close();
 		return getStationObjectArray(c);
 	}
 	public Station getStation(int stationId){
-		//this.open();
+		////this.open();
 		Cursor c = db.rawQuery("SELECT " +
 								Constants.DB_STATION_FIELDS +
 								" FROM station s" +
 								" WHERE s._id = ?", new String[] { Integer.toString(stationId)});
-		//this.close();
+		////this.close();
 		return getStationObjectArray(c).get(0);
 	}
 	

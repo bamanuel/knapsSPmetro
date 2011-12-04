@@ -3,6 +3,7 @@ package com.knaps.dev.Models;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.ListActivity;
 
 import com.knaps.dev.Contracts.AlertObserver;
 import com.knaps.dev.Contracts.ObservationSubject;
@@ -42,6 +43,7 @@ public class Station extends Activity implements AlertObserver {
 		this.parking = parking;
 		
 		DataHelper db = new DataHelper(MyApp.getAppContext());
+		db.open();
 		setLines(db.getLinesByStation(id));	
 	}
 	public void setId(int id) {

@@ -2,6 +2,7 @@ package com.knaps.dev.Utilities;
 
 import java.io.*;
 
+import com.knaps.dev.Models.AlertSubject;
 
 import android.app.Activity;
 import android.app.Application;
@@ -62,5 +63,11 @@ public class AppPrefs extends Application {
 		        e.printStackTrace();
 		    }
 		    return null;
+		}
+		public void saveObsSubject(AlertSubject alertSubject,
+				String alertSubject2) {
+			// TODO Auto-generated method stub
+			saveSerializable(alertSubject,alertSubject2);
+			
 		}
 }

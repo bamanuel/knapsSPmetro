@@ -17,9 +17,6 @@ public class AlertSubject extends Activity implements ObservationSubject {
 	private ArrayList<AlertObserver> observers;
 	private static AlertSubject alertsub = new AlertSubject();
 	
-	private AlertSubject() {
-	}
-	
 	public static AlertSubject getAlertSubject(){
 		return alertsub;
 	}

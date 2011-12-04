@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.knaps.dev.R;
 import com.knaps.dev.DAL.DataHelper;
 import com.knaps.dev.Models.Line;
+import com.knaps.dev.Utilities.MyApp;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -21,7 +22,7 @@ public class DisplayLines extends ListActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
-		dba = new DataHelper(this.getApplicationContext());
+		dba = new DataHelper(MyApp.getAppContext());
 		dba.open();
 		//setContentView(R.layout.lines);
 		
